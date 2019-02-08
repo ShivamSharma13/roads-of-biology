@@ -1,0 +1,100 @@
+import random
+
+def process_test_dataset():
+	with open('test_dataset.txt' , 'r') as f:
+		text = f.read()
+
+	input_strings = text.split('\n')
+
+	graph = {}
+
+	for input_string in input_strings:
+		input_string_line = input_string.split(' -> ')
+		graph[input_string_line[0]] = input_string_line[-1].split(',')
+
+	return graph
+
+def traverse_graph(graph):
+	'''
+	Directed Graph stored as:
+	{
+		'0': ['3'], 
+		'1': ['0'], 
+		'2': ['1', '6'], 
+		'3': ['2'], 
+		'4': ['2'], 
+		'5': ['4'], 
+		'6': ['5', '8'], 
+		'7': ['9'], 
+		'8': ['7'], 
+		'9': ['6']
+	}
+
+	'''
+	cycle = []
+	no_of_edges = len([terminal_node for values in list(graph.values()) for terminal_node in values])
+
+	#Randomly select a node from the graph.
+	first_node = random.choice(list(graph.keys()))
+
+	current_node = first_node
+	
+	#To make sure that loop doesn't return from first iteration.
+	switch = False
+
+	overflow = None
+	previous_node = None
+	while True:
+
+		
+		cycle.append(current_node)
+		print('cycle: ' + str(cycle))
+		try:
+			previous_node = current_node
+			current_node = graph[current_node].pop()
+			print('current_node: ' + str(current_node))
+
+			if len(graph[previous_node]) > len(graph[overflow]):
+				print('overflow node out connections: ' + str(graph[previous_node]))
+				overflow = previous_node
+				print('overflow: ' + str(overflow))
+		except IndexError:
+			if cycle[0] == cycle[-1] and switch == True and len(graph[current_node]) == 0:
+				if len(cycle) > no_of_edges:
+					return cycle
+				else:
+					print('reset')
+					cycle.clear()
+					
+					current_node = overflow
+
+					overflow = None
+					previous_node = None
+					graph = reset_graph()
+					continue
+			else:
+				print('Assumption Falsified')
+		switch = True
+
+def reset_graph():
+	return process_test_dataset()
+
+
+if __name__ == '__main__':
+	graph = process_test_dataset()
+	#print(graph)
+	print("->".join(traverse_graph(graph)))
+	
+
+
+
+
+
+
+
+
+
+
+
+
+

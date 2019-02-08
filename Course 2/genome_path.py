@@ -1,4 +1,4 @@
-with open('dataset_198_3.txt', 'r') as f:
+with open('test_dataset.txt', 'r') as f:
 	text = f.read()
 
 genome_path_strings = text.split('\n')
