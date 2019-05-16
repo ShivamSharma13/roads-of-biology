@@ -62,6 +62,10 @@ def rna_to_protein(rna_string):
 
 
 def peptide_encoding(input_dna_string, protein_string):
+	'''
+	Could be achieved smaller complexity Rabin-Karp or Boyer-Moore algorithm.
+	'''
+	
 	rna_string = input_dna_string.replace('T', 'U')
 	matched_strings = find_matches(rna_string, protein_string)
 	
