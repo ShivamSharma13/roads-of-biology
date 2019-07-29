@@ -1,3 +1,26 @@
+'''
+Sample Input:
+
+7 6
+4 0 3 4 3 0 4
+1 0 0 3 0 1 1
+2 4 1 4 2 0 0
+4 2 2 0 4 2 3
+1 2 2 0 1 0 1
+2 4 2 4 3 0 4
+1 0 4 2 1 4 0
+-
+3 0 1 0 4 3
+4 0 4 0 0 2
+3 4 1 2 3 0
+4 1 0 4 0 1
+2 1 2 4 4 4
+0 3 3 1 4 3
+3 1 3 3 3 3
+0 3 1 3 1 1
+'''
+
+
 def obtain_longest_path_recursively(weighted_matrix, i, j):
 	'''
 	Simply replicated, not sure if this function works.
